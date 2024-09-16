@@ -2,20 +2,20 @@
 
 ## Overview
 
-**Frontend Challenge** is an app that showcases a programmer's skills across various stages of development using modern tools like TypeScript, ESLint, Prettier, and Vite.
+An app that showcases a programmer's skills across various stages of development using modern frontend tools.
 
 ## Project Details
 
 - **Author**: Marcus Koch
 - **Version**: `0.0.1`
-- **License**: Private
 
 ## Scripts
 
 - **`dev`**: Start the development server.
-- **`build`**: Lint, compile, and build the project.
+- **`build`**: Lint, transpile, and build the project.
 - **`preview`**: Preview the production build.
-- **`lint`**: Run ESLint on the codebase.
+- **`lint`**: Run ESLint.
+- **`test`**: Run tests with Vitest.
 
 ## Setup
 
@@ -44,13 +44,20 @@
    ```
 
 5. **Lint the code**:
+
    ```bash
    pnpm run lint
    ```
 
-## Tools Used
+6. **Run tests**:
+   ```bash
+   pnpm run test
+   ```
 
-- **Vite**
-- **TypeScript**
-- **ESLint**
-- **Prettier**
+## Key Features
+
+- **TypeScript** for JS
+- **SASS** for CSS
+- **Autoprefixer** for vendor prefixes
+- **Brotli Compression** for production builds
+- **Testing** with Vitest
