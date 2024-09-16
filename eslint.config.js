@@ -35,7 +35,11 @@ export default [
       'public/',
       '.vscode/',
       '.DS_Store',
-      '.env'
+      '.env',
+      'src/test/',
+      'src/tests/',
+      '*.test.ts',
+      '*.test.tsx'
     ]
   } // Don't lint heres
 ]

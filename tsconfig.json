@@ -17,7 +17,11 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Vitest specific */
+    "types": ["vitest/globals"]
   },
-  "include": ["src"]
+  "include": ["src", "src/**/*.test.ts"],
+  "exclude": ["node_modules"]
 }
