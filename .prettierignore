@@ -1,0 +1,8 @@
+# Ignore artifacts:
+node_modules/
+dist/
+build/
+public/
+.vscode/
+.DS_Store
+.env

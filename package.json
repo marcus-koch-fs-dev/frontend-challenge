@@ -1,0 +1,27 @@
+{
+  "name": "frontend-challenge",
+  "description": "An app that showcases a programmer's skills across various stages of development.",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "author": {
+    "name": "Marcus Koch"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "eslint . && tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^8.5.0",
+    "eslint": "^9.10.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.9.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^8.5.0",
+    "vite": "^5.4.1"
+  }
+}
