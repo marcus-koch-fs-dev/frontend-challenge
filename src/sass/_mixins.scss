@@ -1,0 +1,25 @@
+// Breakpoints for devices
+
+@mixin mobile {
+  @media screen and (max-width: $mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: $mobile + 1) and (max-width: $tablet) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media screen and (min-width: $tablet + 1) and (max-width: $laptop) {
+    @content;
+  }
+}
+
+@mixin desktop-lg {
+  @media screen and (min-width: $laptop + 1) and (max-width: $desktop-lg) {
+    @content;
+  }
+}
