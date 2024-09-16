@@ -3,8 +3,16 @@
 
 import { defineConfig } from 'vite'
 import autoprefixer from 'autoprefixer'
+import compression from 'vite-plugin-compression'
 
 export default defineConfig({
+  plugins: [
+    compression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+      threshold: 10240 // Compression until 10kB
+    })
+  ],
   server: {
     open: true
   },
