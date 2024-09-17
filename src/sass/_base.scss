@@ -15,18 +15,21 @@ body,
   font-family: 'Poppins', 'Sans';
 
   h1 {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     font-weight: 500;
     color: var(--h1);
   }
   p {
-    font-size: 0.5rem;
+    font-size: 1rem;
     font-weight: 200;
     color: var(--p);
   }
-  ul,
   li {
-    text-decoration: none;
     list-style: none;
+  }
+  ul {
+    text-decoration: none;
+    margin-block: 0;
+    padding-inline: 0;
   }
 }
