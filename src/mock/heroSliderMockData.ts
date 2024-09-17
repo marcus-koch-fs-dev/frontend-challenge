@@ -1,4 +1,12 @@
-export type Products = Array<Record<string, unknown>>
+export interface ProductDetails {
+  id: number
+  title: string
+  description: string
+  images: string[]
+  [key: string]: unknown
+}
+
+export type Products = Array<ProductDetails>
 
 export const products: Products = [
   {
