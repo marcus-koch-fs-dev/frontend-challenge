@@ -1,20 +1,23 @@
 .hero-button {
   border-radius: 0.5rem;
   padding: 1rem;
+  box-sizing: border-box;
+  height: 100%;
+  max-width: 12rem;
 
   &.action-type-Link {
-    background-color: #009494;
-    color: white;
+    background-color: var(--bg_btn-hero-link);
+    color: var(--btn-hero);
     border: none;
   }
 
   &.action-type-Contact {
     background-color: transparent;
-    color: black;
-    border: solid white 0.2rem;
+    color: var(--btn-hero);
+    border: solid 0.15rem var(--btn-hero);
   }
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.24);
+    background-color: var(--bg_btn-hero--hover);
   }
 }

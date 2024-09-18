@@ -43,7 +43,8 @@
   &__action-bar {
     display: flex;
     justify-content: start;
-    gap: 10px;
+    gap: 1rem;
+    align-items: stretch;
   }
 
   &__slider-wrapper {
