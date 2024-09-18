@@ -133,6 +133,7 @@ export default class HeroSlider extends HTMLElement {
   // Generate the list of slide indicators
   indicatorList(): string {
     return products
+      .slice(0, 4)
       .map((product: ProductDetails, idx: number) => {
         const isActive =
           this.activeSliderNo === idx
