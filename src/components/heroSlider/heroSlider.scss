@@ -86,15 +86,14 @@
   }
 
   &__button {
-    background-color: #007bff;
-    color: white;
+    background-color: var(--bg_btn-controls);
+    color: var(--btn-controls);
     border: none;
-    padding: 10px 20px;
+    padding: 1rem;
     cursor: pointer;
-    border-radius: 5px;
 
     &:hover {
-      background-color: #0056b3;
+      background-color: var(--bg_btn-controls--hover);
     }
   }
 }

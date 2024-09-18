@@ -131,9 +131,13 @@ export default class HeroSlider extends HTMLElement {
                 <ul class="hero-slider__slider-indicators">
                 ${this.indicatorList()}
                 </ul>
-                <div class="hero-slider_slider-controls">
-                  <button class="hero-slider__button hero-slider__button--previous">Previous</button>
-                  <button class="hero-slider__button hero-slider__button--next">Next</button>
+                <div class="hero-slider__slider-controls">
+                  <button class="hero-slider__button hero-slider__button--previous">
+                    <i class="fas fa-chevron-left hero-slider__icon hero-slider__icon--previous"></i>
+                  </button>
+                  <button class="hero-slider__button hero-slider__button--next">
+                    <i class="fas fa-chevron-right hero-slider__icon hero-slider__icon--next"></i>
+                  </button>
                 </div>
               </div>
           </section>
