@@ -77,4 +77,34 @@ describe('HeroSlider Component', () => {
       heroSliderElement?.querySelector('.hero-slider__headline')?.textContent
     ).toEqual(products[products.length - 1].title)
   })
+
+  it('should go to third slide and then back to second slide with previous button', () => {
+    const prevButton = heroSliderElement?.querySelector(
+      '.hero-slider__button--previous'
+    ) as HTMLButtonElement
+    if (!prevButton) {
+      throw new Error('Next or Previous button not found.')
+    }
+
+    // Find the slide indicators (simulate a click on the third slide indicator)
+    const thirdSlideIndicator = heroSliderElement?.querySelectorAll(
+      '.hero-slider__slide-indicator'
+    )[2] as HTMLElement
+
+    if (!thirdSlideIndicator) {
+      throw new Error('Third slide indicator not found.')
+    }
+
+    // Simulate clicking on the third slide indicator
+    thirdSlideIndicator.click()
+    expect(
+      heroSliderElement?.querySelector('.hero-slider__headline')?.textContent
+    ).toEqual(products[2].title)
+
+    // Simulate clicking on the previous button
+    prevButton.click()
+    expect(
+      heroSliderElement?.querySelector('.hero-slider__headline')?.textContent
+    ).toEqual(products[1].title)
+  })
 })
