@@ -156,8 +156,10 @@ export default class HeroSlider extends HTMLElement {
             <div class="hero-slider__content-alignment">
               ${this.updateHeroText()}
               <div class="hero-slider__action-bar">
-                <hero-button actionType="Link">Mehr Infos</hero-button>
-                <hero-button actionType="Contact">Kontakt</hero-button>
+                <hero-button>Mehr Infos 
+                <i class="fas fa-arrow-right"></i>
+                </hero-button>
+                <hero-button buttonStyle="outlined">Kontakt</hero-button>
               </div>
               </div>
               <div class="hero-slider__slider-wrapper">

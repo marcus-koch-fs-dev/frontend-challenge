@@ -1,27 +1,22 @@
 import './heroButton.scss'
 
-// Defines the possible action types for the button, either 'Link' or 'Contact'
-type HeroButtonActionTypes = 'Link' | 'Contact'
+type HeroButtonStyleTypes = 'outlined' | 'full'
 
-// Defines a new web component named 'HeroButton', extending from HTMLElement
 export default class HeroButton extends HTMLElement {
-  // Stores the action type of the button
-  actionType: HeroButtonActionTypes
+  buttonStyle: HeroButtonStyleTypes
+  href: string | null = null
 
   constructor() {
     super()
-
-    // Initializes the action type based on the 'actionType' attribute or defaults to 'Link'
-    this.actionType =
-      (this.getAttribute('actionType') as HeroButtonActionTypes) || 'Link'
-
-    // Renders the button based on the initial attributes and content
+    this.buttonStyle =
+      (this.getAttribute('buttonStyle') as HeroButtonStyleTypes) || 'full'
+    this.href = this.getAttribute('href') || null
     this.render()
   }
 
   // Specifies the attributes to observe for changes
   static get observedAttributes(): string[] {
-    return ['actionType']
+    return ['buttonStyle', 'href']
   }
 
   // Called when an observed attribute changes
@@ -30,11 +25,14 @@ export default class HeroButton extends HTMLElement {
     oldValue: string | null,
     newValue: string | null
   ) {
-    // If the 'actionType' attribute value has changed, update it
+    // If the 'buttonStyle' attribute value has changed, update it
     if (oldValue !== newValue) {
       switch (name) {
-        case 'actionType':
-          this.actionType = (newValue as HeroButtonActionTypes) || 'Link'
+        case 'buttonStyle':
+          this.buttonStyle = (newValue as HeroButtonStyleTypes) || 'full'
+          break
+        case 'href':
+          this.href = newValue || '#'
           break
       }
       // Re-render the element to reflect the changes
@@ -44,14 +42,13 @@ export default class HeroButton extends HTMLElement {
 
   // Renders the button element based on the current attributes and content
   render(): void {
-    const actionTypeClass = `action-type-${this.actionType}`
-    const label = this.innerHTML || 'Click Me' // Uses innerHTML as the label
+    const label = this.innerHTML || 'Click Me'
+    const styleClass = `hero-button--${this.buttonStyle}`
 
-    // Sets the inner HTML of the button, including the appropriate CSS class and label
     this.innerHTML = `
-        <button class="hero-button ${actionTypeClass}" type="button">
-          ${label}
-        </button>
-      `
+        <a href="${this.href}" class="hero-button ${styleClass}">
+          <span class="hero-button__label">${label}</span>
+        </a>      
+      `.trim()
   }
 }

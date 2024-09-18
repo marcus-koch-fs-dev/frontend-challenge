@@ -4,20 +4,31 @@
   box-sizing: border-box;
   height: 100%;
   max-width: 12rem;
+  max-height: 3.5rem;
+  display: inline-block;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  &.action-type-Link {
-    background-color: var(--bg_btn-hero-link);
+  &.hero-button--full {
+    background-color: var(--bg_btn-hero--full);
     color: var(--btn-hero);
     border: none;
   }
 
-  &.action-type-Contact {
-    background-color: transparent;
+  &.hero-button--outlined {
+    background-color: var(--bg_btn-hero--outlined);
     color: var(--btn-hero);
     border: solid 0.15rem var(--btn-hero);
   }
 
   &:hover {
     background-color: var(--bg_btn-hero--hover);
+    color: var(--btn-hero--hover);
+  }
+
+  i {
+    margin-left: 0.5rem; /* Add margin when an icon is attached */
   }
 }
