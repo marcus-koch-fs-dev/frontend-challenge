@@ -1,7 +1,7 @@
 .hero-slider {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 60vh;
   position: relative;
   overflow: hidden;
 
@@ -28,8 +28,7 @@
     justify-content: end;
     display: flex;
     flex-direction: column;
-    margin: 1rem;
-    padding: 1rem 1rem 4rem 1rem;
+    margin: 0 2vw;
   }
 
   &__headline {
@@ -49,8 +48,8 @@
 
   &__slider-wrapper {
     z-index: 2;
-    margin: 2rem 1rem;
-    padding: 1rem;
+    margin: 2rem 2vw;
+    padding: 1rem 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -63,13 +62,13 @@
 
   &__slide-item {
     :nth-child(1) {
-      margin: 0 0.25rem;
+      margin: 0 0.35rem;
     }
   }
 
   &__slide-indicator {
     display: inline-block;
-    width: 6rem;
+    width: 12vw;
     height: 0.2rem;
     background-color: var(--span-indicator);
     border-radius: 10rem;
@@ -84,6 +83,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+    gap: 3rem;
   }
 
   &__button {
@@ -95,6 +95,58 @@
 
     &:hover {
       background-color: var(--bg_btn-controls--hover);
+    }
+  }
+
+  @include respond-to(desktop-4k) {
+    &__content-alignment {
+      margin: 0 4vw;
+    }
+    &__slider-wrapper {
+      margin: 2rem 4vw;
+      padding: 1rem 0;
+    }
+  }
+
+  @include respond-to(desktop-xl) {
+    &__content-alignment {
+      margin: 0 4vw;
+    }
+    &__slider-wrapper {
+      margin: 2rem 4vw;
+      padding: 1rem 0;
+    }
+  }
+
+  @include respond-to(laptop) {
+    &__content-alignment {
+      width: 90%;
+    }
+
+    &__slide-indicator {
+      width: 19vw;
+    }
+  }
+
+  @include respond-to(tablet) {
+    &__content-alignment {
+      width: 90%;
+    }
+
+    &__slide-indicator {
+      width: 17vw;
+    }
+  }
+  @include respond-to(mobile) {
+    &__content-alignment {
+      width: 100%;
+    }
+
+    &__slide-indicator {
+      width: 22vw;
+    }
+    &__slider-controls {
+      display: none;
     }
   }
 }

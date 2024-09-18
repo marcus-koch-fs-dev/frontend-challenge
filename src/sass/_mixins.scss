@@ -1,25 +1,27 @@
-// Breakpoints for devices
-
-@mixin mobile {
-  @media screen and (max-width: $mobile) {
-    @content;
-  }
-}
-
-@mixin tablet {
-  @media screen and (min-width: $mobile + 1) and (max-width: $tablet) {
-    @content;
-  }
-}
-
-@mixin laptop {
-  @media screen and (min-width: $tablet + 1) and (max-width: $laptop) {
-    @content;
-  }
-}
-
-@mixin desktop-lg {
-  @media screen and (min-width: $laptop + 1) and (max-width: $desktop-lg) {
-    @content;
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == desktop-4k {
+    @media screen and (min-width: $desktop-4k) {
+      @content;
+    }
+  } @else if $breakpoint == desktop-xl {
+    @media screen and (min-width: $desktop-xl) and (max-width: $desktop-4k - 1px) {
+      @content;
+    }
+  } @else if $breakpoint == desktop {
+    @media screen and (min-width: $desktop) and (max-width: $desktop-xl - 1px) {
+      @content;
+    }
+  } @else if $breakpoint == laptop {
+    @media screen and (min-width: $laptop) and (max-width: $desktop - 1px) {
+      @content;
+    }
+  } @else if $breakpoint == tablet {
+    @media screen and (min-width: $tablet) and (max-width: $laptop - 1px) {
+      @content;
+    }
+  } @else if $breakpoint == mobile {
+    @media screen and (max-width: $tablet - 1px) {
+      @content;
+    }
   }
 }

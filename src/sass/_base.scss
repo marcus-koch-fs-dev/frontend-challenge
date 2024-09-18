@@ -6,7 +6,9 @@
 $mobile: 425px; //360 small mobile
 $tablet: 768px;
 $laptop: 1024px;
-$desktop-lg: 1440px;
+$desktop: 1440px;
+$desktop-xl: 1920px;
+$desktop-4k: 2560px;
 
 html,
 body,
@@ -14,16 +16,6 @@ body,
   height: 100vh;
   font-family: 'Poppins', 'Sans';
 
-  h1 {
-    font-size: 3.5rem;
-    font-weight: 500;
-    color: var(--h1);
-  }
-  p {
-    font-size: 1rem;
-    font-weight: 200;
-    color: var(--p);
-  }
   li {
     list-style: none;
   }
@@ -35,5 +27,65 @@ body,
   a {
     text-decoration: none;
     cursor: pointer;
+  }
+
+  h1 {
+    color: var(--h1);
+    font-weight: 400;
+  }
+  p {
+    color: var(--p);
+    font-weight: 200;
+  }
+
+  @include respond-to(desktop-4k) {
+    h1 {
+      font-size: 4rem;
+      font-weight: 500;
+    }
+    p {
+      font-size: 1.5rem;
+      font-weight: 200;
+    }
+  }
+  @include respond-to(desktop-xl) {
+    h1 {
+      font-size: 4rem;
+    }
+    p {
+      font-size: 1.5rem;
+    }
+  }
+  @include respond-to(desktop) {
+    h1 {
+      font-size: 4rem;
+    }
+    p {
+      font-size: 1.5rem;
+    }
+  }
+  @include respond-to(laptop) {
+    h1 {
+      font-size: 3rem;
+    }
+    p {
+      font-size: 1.25rem;
+    }
+  }
+  @include respond-to(tablet) {
+    h1 {
+      font-size: 3rem;
+    }
+    p {
+      font-size: 1.25rem;
+    }
+  }
+  @include respond-to(mobile) {
+    h1 {
+      font-size: 3rem;
+    }
+    p {
+      font-size: 1.25rem;
+    }
   }
 }
