@@ -19,12 +19,14 @@ export default class HeroSlider extends HTMLElement {
   slideLength: number = products.length // Total number of slides
   prevButton: HTMLButtonElement | null = null // Reference to the "Previous" button
   nextButton: HTMLButtonElement | null = null // Reference to the "Next" button
+  sliderIndicators: HTMLElement | null = null // Reference to the slider indicators container
 
   constructor() {
     super()
     // Bind methods to the class instance
     this.showNextSlide = this.showNextSlide.bind(this)
     this.showPreviousSlide = this.showPreviousSlide.bind(this)
+    this.showSelectSlide = this.showSelectSlide.bind(this)
   }
 
   // Called when the element is added to the DOM
@@ -38,13 +40,22 @@ export default class HeroSlider extends HTMLElement {
     this.cleanupEventListeners()
   }
 
-  // Set up event listeners for the "Next" and "Previous" buttons
+  // Set up event listeners into the DOM
   setupEventListeners() {
     this.prevButton = this.querySelector('.hero-slider__button--previous')
     this.nextButton = this.querySelector('.hero-slider__button--next')
+    this.sliderIndicators = this.querySelector(
+      '.hero-slider__slider-indicators'
+    )
+
     if (this.prevButton && this.nextButton) {
       this.prevButton.addEventListener('click', this.showPreviousSlide)
       this.nextButton.addEventListener('click', this.showNextSlide)
+    }
+
+    // Event-Delegation with Bubbling
+    if (this.sliderIndicators) {
+      this.sliderIndicators.addEventListener('click', this.handleSlideClick)
     }
   }
 
@@ -53,6 +64,22 @@ export default class HeroSlider extends HTMLElement {
     if (this.prevButton && this.nextButton) {
       this.prevButton.removeEventListener('click', this.showPreviousSlide)
       this.nextButton.removeEventListener('click', this.showNextSlide)
+    }
+
+    if (this.sliderIndicators) {
+      this.sliderIndicators.removeEventListener('click', this.handleSlideClick)
+    }
+  }
+
+  // Handles click events on slide indicators (event delegation)
+  handleSlideClick = (event: Event) => {
+    const target = event.target as HTMLElement
+
+    if (target.classList.contains('hero-slider__slide-indicator')) {
+      const index = Array.from(this.sliderIndicators!.children).indexOf(
+        target.parentElement!
+      )
+      this.showSelectSlide(index)
     }
   }
 
@@ -73,6 +100,12 @@ export default class HeroSlider extends HTMLElement {
     } else {
       this.activeSliderNo--
     }
+    this.render()
+  }
+
+  // Show the selected slide based on its index
+  showSelectSlide(index: number) {
+    this.activeSliderNo = index
     this.render()
   }
 
