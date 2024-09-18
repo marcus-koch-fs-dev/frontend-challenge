@@ -70,12 +70,12 @@
     display: inline-block;
     width: 6rem;
     height: 0.2rem;
-    background-color: grey;
+    background-color: var(--span-indicator);
     border-radius: 10rem;
     cursor: pointer;
 
-    &--active {
-      background-color: #d6dadf;
+    &.hero-slider__slide-indicator--active {
+      background-color: var(--span-indicator--active);
     }
   }
 

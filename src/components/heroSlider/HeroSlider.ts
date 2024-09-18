@@ -100,12 +100,18 @@ export default class HeroSlider extends HTMLElement {
   // Generate the list of slide indicators
   indicatorList(): string {
     return products
-      .map(
-        (product: ProductDetails) =>
-          `<li class="hero-slider__slide-item" key=${product.id}>
-        <span class="hero-slider__slide-indicator"/>
-        </li>`
-      )
+      .map((product: ProductDetails, idx: number) => {
+        const isActive =
+          this.activeSliderNo === idx
+            ? 'hero-slider__slide-indicator--active'
+            : ''
+
+        return `
+        <li class="hero-slider__slide-item" key=${product.id}>
+          <span class="hero-slider__slide-indicator ${isActive}"></span>
+        </li>
+      `
+      })
       .join('')
   }
 
