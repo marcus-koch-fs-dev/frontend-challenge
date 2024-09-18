@@ -1,28 +1,80 @@
 import HeroSlider from './HeroSlider'
+import { products } from '../../mock/heroSliderMockData'
 
-describe('Render Hero-Slider component', () => {
-  let heroSliderElement: Element | null
-  let headlineElem: Element | null | undefined
+describe('HeroSlider Component', () => {
+  let heroSliderElement: HTMLElement | null
 
-  beforeAll(() => {
-    // Register Hero Component
-    customElements.define('hero-slider', HeroSlider)
+  beforeEach(() => {
+    // Register the HeroSlider component and add it to the DOM before each test
+    if (!customElements.get('hero-slider')) {
+      customElements.define('hero-slider', HeroSlider)
+    }
 
-    // Add HeroSlider to the DOM
+    // Add the HeroSlider component to the document body
     document.body.innerHTML = `<hero-slider></hero-slider>`
     heroSliderElement = document.querySelector('hero-slider')
-    headlineElem = heroSliderElement?.shadowRoot?.querySelector(
-      '.hero-slider__title'
+  })
+
+  afterEach(() => {
+    // Clean up the DOM after each test by clearing the body
+    document.body.innerHTML = ''
+    heroSliderElement = null
+  })
+
+  it('should be in the DOM', () => {
+    // Check if the HeroSlider component is in the DOM
+    expect(heroSliderElement).toBeInTheDocument()
+  })
+
+  it('should have "Next" and "Previous" buttons registered in the DOM', () => {
+    // Find the next and previous buttons inside the HeroSlider component
+    const nextButton = heroSliderElement?.querySelector(
+      '.hero-slider__button--next'
     )
+    const prevButton = heroSliderElement?.querySelector(
+      '.hero-slider__button--previous'
+    )
+
+    // Check if the buttons are present in the DOM
+    expect(nextButton).toBeInTheDocument()
+    expect(prevButton).toBeInTheDocument()
   })
 
-  it('Render h1 with the correct title: Hello World', () => {
-    const headlineText = headlineElem?.textContent
-    expect(headlineText).toEqual('Hello World')
-  })
+  it('should navigate slides correctly on button clicks', () => {
+    // Find the next and previous buttons
+    const nextButton = heroSliderElement?.querySelector(
+      '.hero-slider__button--next'
+    ) as HTMLButtonElement
+    const prevButton = heroSliderElement?.querySelector(
+      '.hero-slider__button--previous'
+    ) as HTMLButtonElement
 
-  it('Render h1 and test "Good Bye World" does not match title: Hello World', () => {
-    const headlineText = headlineElem?.textContent
-    expect(headlineText).not.toEqual('Good Bye World')
+    // Ensure the buttons are found before proceeding
+    if (!nextButton || !prevButton) {
+      throw new Error('Next or Previous button not found.')
+    }
+
+    // Check that the first slide is displayed initially (Index 0)
+    expect(
+      heroSliderElement?.querySelector('.hero-slider__headline')?.textContent
+    ).toEqual(products[0].title)
+
+    // Simulate a click on the next button and check if the second slide is shown
+    nextButton.click()
+    expect(
+      heroSliderElement?.querySelector('.hero-slider__headline')?.textContent
+    ).toEqual(products[1].title)
+
+    // Simulate a click on the previous button and check if the first slide is shown again
+    prevButton.click()
+    expect(
+      heroSliderElement?.querySelector('.hero-slider__headline')?.textContent
+    ).toEqual(products[0].title)
+
+    // Simulate another click on the previous button and check if the last slide is shown
+    prevButton.click()
+    expect(
+      heroSliderElement?.querySelector('.hero-slider__headline')?.textContent
+    ).toEqual(products[products.length - 1].title)
   })
 })
