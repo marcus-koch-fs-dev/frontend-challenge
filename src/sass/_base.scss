@@ -3,12 +3,16 @@
 @import './_colors';
 
 // Breakpoints media devices: max sizes
-$mobile: 425px; //360 small mobile
+$mobile: 320px;
+$mobile-md: 375px;
+$mobile-lg: 425px;
 $tablet: 768px;
 $laptop: 1024px;
 $desktop: 1440px;
 $desktop-xl: 1920px;
 $desktop-4k: 2560px;
+
+$hero-button--font-size: 1rem;
 
 html,
 body,
@@ -40,52 +44,76 @@ body,
 
   @include respond-to(desktop-4k) {
     h1 {
-      font-size: 4rem;
+      font-size: 2.45rem;
       font-weight: 500;
     }
     p {
-      font-size: 1.5rem;
+      font-size: 1.35rem;
       font-weight: 200;
+      $hero-button--font-size: 1.35rem;
     }
   }
   @include respond-to(desktop-xl) {
     h1 {
-      font-size: 4rem;
+      font-size: 2.15rem;
     }
     p {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
+      $hero-button--font-size: 1.25rem;
     }
   }
   @include respond-to(desktop) {
     h1 {
-      font-size: 4rem;
+      font-size: 1.95rem;
     }
     p {
-      font-size: 1.5rem;
+      font-size: 1.15rem;
+      $hero-button--font-size: 0.95rem;
     }
   }
   @include respond-to(laptop) {
     h1 {
-      font-size: 3rem;
+      font-size: 1.75rem;
     }
     p {
-      font-size: 1.25rem;
+      font-size: 1rem;
+      $hero-button--font-size: 1rem;
     }
   }
   @include respond-to(tablet) {
     h1 {
-      font-size: 3rem;
+      font-size: 1.6rem;
     }
     p {
-      font-size: 1.25rem;
+      font-size: 0.95rem;
+      $hero-button--font-size: 0.95rem;
+    }
+  }
+  @include respond-to(mobile-lg) {
+    h1 {
+      font-size: 1.6rem;
+    }
+    p {
+      font-size: 0.95rem;
+      $hero-button--font-size: 0.95rem;
+    }
+  }
+  @include respond-to(mobile-md) {
+    h1 {
+      font-size: 1.75rem;
+    }
+    p {
+      font-size: 0.95rem;
+      $hero-button--font-size: 0.95rem;
     }
   }
   @include respond-to(mobile) {
     h1 {
-      font-size: 3rem;
+      font-size: 1.75rem;
     }
     p {
-      font-size: 1.25rem;
+      font-size: 0.95rem;
+      $hero-button--font-size: 0.95rem;
     }
   }
 }

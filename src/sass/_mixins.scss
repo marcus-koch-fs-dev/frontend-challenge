@@ -1,26 +1,42 @@
 @mixin respond-to($breakpoint) {
-  @if $breakpoint == desktop-4k {
-    @media screen and (min-width: $desktop-4k) {
+  @if $breakpoint == mobile {
+    // Mobile devices (until 320px)
+    @media screen and (max-width: $mobile) {
       @content;
     }
-  } @else if $breakpoint == desktop-xl {
-    @media screen and (min-width: $desktop-xl) and (max-width: $desktop-4k - 1px) {
+  } @else if $breakpoint == mobile-md {
+    // Medium mobile devices (321px until 375px)
+    @media screen and (min-width: ($mobile + 1px)) and (max-width: $mobile-md) {
       @content;
     }
-  } @else if $breakpoint == desktop {
-    @media screen and (min-width: $desktop) and (max-width: $desktop-xl - 1px) {
-      @content;
-    }
-  } @else if $breakpoint == laptop {
-    @media screen and (min-width: $laptop) and (max-width: $desktop - 1px) {
+  } @else if $breakpoint == mobile-lg {
+    // Large mobile devices (376px until 425px)
+    @media screen and (min-width: ($mobile-md + 1px)) and (max-width: $mobile-lg) {
       @content;
     }
   } @else if $breakpoint == tablet {
-    @media screen and (min-width: $tablet) and (max-width: $laptop - 1px) {
+    // Tablets (426px until 768px)
+    @media screen and (min-width: ($mobile-lg + 1px)) and (max-width: $tablet) {
       @content;
     }
-  } @else if $breakpoint == mobile {
-    @media screen and (max-width: $tablet - 1px) {
+  } @else if $breakpoint == laptop {
+    // Laptops (769px until 1024px)
+    @media screen and (min-width: ($tablet + 1px)) and (max-width: $laptop) {
+      @content;
+    }
+  } @else if $breakpoint == desktop {
+    // Standard desktops (1025px until 1440px)
+    @media screen and (min-width: ($laptop + 1px)) and (max-width: $desktop) {
+      @content;
+    }
+  } @else if $breakpoint == desktop-xl {
+    // Extra large desktops (1441px until 1920px)
+    @media screen and (min-width: ($desktop + 1px)) and (max-width: $desktop-xl) {
+      @content;
+    }
+  } @else if $breakpoint == desktop-4k {
+    // 4K Displays (ab 1921px)
+    @media screen and (min-width: ($desktop-xl + 1px)) {
       @content;
     }
   }

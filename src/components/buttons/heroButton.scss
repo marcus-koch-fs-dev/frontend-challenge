@@ -4,7 +4,7 @@
   box-sizing: border-box;
   height: 100%;
   max-width: 12rem;
-  max-height: 3.5rem;
+  max-height: 3rem;
   display: inline-block;
   text-align: center;
   display: flex;
@@ -12,7 +12,7 @@
   justify-content: center;
 
   &__label {
-    font-size: 1.5rem;
+    font-size: var($hero-button--font-size);
     color: var(--btn-hero);
   }
 
@@ -37,19 +37,16 @@
     margin-left: 0.5rem; /* Add margin when an icon is attached */
   }
 
-  @include respond-to(laptop) {
-    &__label {
-      font-size: 1.25rem;
-    }
-  }
   @include respond-to(tablet) {
-    &__label {
-      font-size: 1.25rem;
-    }
+    max-height: 2.55rem;
+  }
+  @include respond-to(mobile-lg) {
+    max-height: 2.35rem;
+  }
+  @include respond-to(mobile-md) {
+    max-height: 2.25rem;
   }
   @include respond-to(mobile) {
-    &__label {
-      font-size: 1.25rem;
-    }
+    max-height: 2.15rem;
   }
 }
