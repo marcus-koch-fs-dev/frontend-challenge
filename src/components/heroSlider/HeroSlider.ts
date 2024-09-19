@@ -16,10 +16,17 @@ import {
 export default class HeroSlider extends HTMLElement {
   products: ProductsType = [] // Array to hold product details
   activeSliderNo: number = 0 // Tracks the current slide index
+  activeSliderId: string | null = products[0]?.id.toString() ?? null // Clarify the indicator to highlight
   slideLength: number = products.length // Total number of slides
   prevButton: HTMLButtonElement | null = null // Reference to the "Previous" button
   nextButton: HTMLButtonElement | null = null // Reference to the "Next" button
   sliderIndicators: HTMLElement | null = null // Reference to the slider indicators container
+
+  lowerBorder: number = 0 // Lower boundary for the indicators slice
+  upperBorder: number = 4 // Upper boundary for the indicators slice
+
+  // Constant for maximum number of indicators
+  readonly MAX_INDICATORS: number = 4
 
   private touchStartX: number = 0 // Start point of touch at x-axis
   private touchEndX: number = 0 // Endpoint of touch at x-axis
@@ -123,9 +130,23 @@ export default class HeroSlider extends HTMLElement {
   // Navigate to the next slide and re-render the slider
   showNextSlide() {
     if (this.activeSliderNo === this.slideLength - 1) {
+      // If on the last slide, loop back to the first slide
       this.activeSliderNo = 0
+      this.activeSliderId = products[0].id.toString()
+      this.lowerBorder = 0
+      this.upperBorder = Math.min(this.MAX_INDICATORS, this.slideLength) // Show a maximum of 4 indicators
     } else {
       this.activeSliderNo++
+      this.activeSliderId = products[this.activeSliderNo].id.toString()
+
+      // Adjust indicator borders if necessary
+      if (this.activeSliderNo >= this.upperBorder) {
+        this.lowerBorder = this.activeSliderNo
+        this.upperBorder = Math.min(
+          this.activeSliderNo + this.MAX_INDICATORS,
+          this.slideLength
+        )
+      }
     }
     this.render()
   }
@@ -133,9 +154,24 @@ export default class HeroSlider extends HTMLElement {
   // Navigate to the previous slide and re-render the slider
   showPreviousSlide() {
     if (this.activeSliderNo === 0) {
+      // If at the first slide, loop to the last slide
       this.activeSliderNo = this.slideLength - 1
+      this.activeSliderId = products[this.activeSliderNo].id.toString()
+
+      // Show the last indicators based on the remaining slides
+      this.lowerBorder =
+        this.slideLength - (products.length % this.MAX_INDICATORS)
+      this.upperBorder = this.slideLength
     } else {
       this.activeSliderNo--
+      this.activeSliderId = products[this.activeSliderNo].id.toString()
+
+      // Adjust the indicator borders if necessary
+      if (this.activeSliderNo < this.lowerBorder) {
+        this.lowerBorder =
+          this.activeSliderNo - 3 >= 0 ? this.activeSliderNo - 3 : 0
+        this.upperBorder = this.activeSliderNo + 1
+      }
     }
     this.render()
   }
@@ -143,6 +179,7 @@ export default class HeroSlider extends HTMLElement {
   // Show the selected slide based on its index
   showSelectSlide(index: number) {
     this.activeSliderNo = index
+    this.activeSliderId = products[index].id.toString()
     this.render()
   }
 
@@ -170,15 +207,15 @@ export default class HeroSlider extends HTMLElement {
   // Generate the list of slide indicators
   indicatorList(): string {
     return products
-      .slice(0, 4)
-      .map((product: ProductDetails, idx: number) => {
+      .slice(this.lowerBorder, this.upperBorder)
+      .map((product: ProductDetails) => {
         const isActive =
-          this.activeSliderNo === idx
+          this.activeSliderId === product.id.toString()
             ? 'hero-slider__slide-indicator--active'
             : ''
 
         return `
-        <li class="hero-slider__slide-item" key=${product.id}>
+        <li class="hero-slider__slide-item" id=${product.id.toString()} key=${product.id}>
           <span class="hero-slider__slide-indicator ${isActive}"></span>
         </li>
       `
