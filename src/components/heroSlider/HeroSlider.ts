@@ -16,7 +16,7 @@ import {
 export default class HeroSlider extends HTMLElement {
   products: ProductsType = [] // Array to hold product details
   activeSliderNo: number = 0 // Tracks the current slide index
-  activeSliderId: string | null = products[0]?.id.toString() ?? null // Clarify the indicator to highlight
+  activeSliderId: string | null = null // Clarify the indicator to highlight
   slideLength: number = products.length // Total number of slides
   prevButton: HTMLButtonElement | null = null // Reference to the "Previous" button
   nextButton: HTMLButtonElement | null = null // Reference to the "Next" button
@@ -43,6 +43,10 @@ export default class HeroSlider extends HTMLElement {
 
   // Called when the element is added to the DOM
   connectedCallback() {
+    // Initialize the activeSliderId with the first product's ID, if available
+    if (products.length > 0) {
+      this.activeSliderId = products[0]?.id.toString()
+    }
     this.render()
     this.setupEventListeners()
   }
