@@ -21,12 +21,17 @@ export default class HeroSlider extends HTMLElement {
   nextButton: HTMLButtonElement | null = null // Reference to the "Next" button
   sliderIndicators: HTMLElement | null = null // Reference to the slider indicators container
 
+  private touchStartX: number = 0 // Start point of touch at x-axis
+  private touchEndX: number = 0 // Endpoint of touch at x-axis
+  private minSwipeDistance: number = 50 // Min swipe distance
+
   constructor() {
     super()
-    // Bind methods to the class instance
     this.showNextSlide = this.showNextSlide.bind(this)
     this.showPreviousSlide = this.showPreviousSlide.bind(this)
-    this.showSelectSlide = this.showSelectSlide.bind(this)
+    this.handleTouchStart = this.handleTouchStart.bind(this)
+    this.handleTouchMove = this.handleTouchMove.bind(this)
+    this.handleTouchEnd = this.handleTouchEnd.bind(this)
   }
 
   // Called when the element is added to the DOM
@@ -48,6 +53,12 @@ export default class HeroSlider extends HTMLElement {
       '.hero-slider__slider-indicators'
     )
 
+    this.addEventListener('touchstart', this.handleTouchStart, {
+      passive: false
+    })
+    this.addEventListener('touchmove', this.handleTouchMove, { passive: false })
+    this.addEventListener('touchend', this.handleTouchEnd, { passive: false })
+
     if (this.prevButton && this.nextButton) {
       this.prevButton.addEventListener('click', this.showPreviousSlide)
       this.nextButton.addEventListener('click', this.showNextSlide)
@@ -61,6 +72,12 @@ export default class HeroSlider extends HTMLElement {
 
   // Remove event listeners when the component is removed
   cleanupEventListeners() {
+    this.addEventListener('touchstart', this.handleTouchStart, {
+      passive: false
+    })
+    this.addEventListener('touchmove', this.handleTouchMove, { passive: false })
+    this.addEventListener('touchend', this.handleTouchEnd, { passive: false })
+
     if (this.prevButton && this.nextButton) {
       this.prevButton.removeEventListener('click', this.showPreviousSlide)
       this.nextButton.removeEventListener('click', this.showNextSlide)
@@ -68,6 +85,26 @@ export default class HeroSlider extends HTMLElement {
 
     if (this.sliderIndicators) {
       this.sliderIndicators.removeEventListener('click', this.handleSlideClick)
+    }
+  }
+
+  handleTouchStart(event: TouchEvent) {
+    this.touchStartX = event.changedTouches[0].screenX
+  }
+
+  handleTouchMove(event: TouchEvent) {
+    this.touchEndX = event.changedTouches[0].screenX
+  }
+
+  handleTouchEnd() {
+    const swipeDistance = this.touchEndX - this.touchStartX
+
+    if (Math.abs(swipeDistance) > this.minSwipeDistance) {
+      if (swipeDistance < 0) {
+        this.showNextSlide()
+      } else {
+        this.showPreviousSlide()
+      }
     }
   }
 
