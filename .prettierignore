@@ -7,8 +7,4 @@ public/
 .DS_Store
 .env
 
-# Ignore test files and folders
-src/test/
-src/tests/
-*.test.ts
-*.test.tsx
+

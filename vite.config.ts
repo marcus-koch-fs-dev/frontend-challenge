@@ -4,9 +4,11 @@
 import { defineConfig } from 'vite'
 import autoprefixer from 'autoprefixer'
 import compression from 'vite-plugin-compression'
+import sassDts from 'vite-plugin-sass-dts'
 
 export default defineConfig({
   plugins: [
+    sassDts(),
     compression({
       algorithm: 'brotliCompress',
       ext: '.br',
@@ -19,11 +21,16 @@ export default defineConfig({
   css: {
     postcss: {
       plugins: [autoprefixer()]
+    },
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "src/sass/_base.scss";` // Global import of _base.scss
+      }
     }
   },
   test: {
-    globals: true, // Use functions without import
+    globals: true, // Global import of test methods
     environment: 'jsdom',
-    setupFiles: ['./src/tests/setupTest.ts'] // Path to test config
+    setupFiles: ['./src/tests/setupTest.ts']
   }
 })

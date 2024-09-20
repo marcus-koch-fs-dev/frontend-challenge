@@ -1,0 +1,52 @@
+.hero-button {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  height: 100%;
+  max-width: 12rem;
+  max-height: 3rem;
+  display: inline-block;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__label {
+    font-size: var($hero-button--font-size);
+    color: var(--btn-hero);
+  }
+
+  &.hero-button--full {
+    background-color: var(--bg_btn-hero--full);
+    color: var(--btn-hero);
+    border: none;
+  }
+
+  &.hero-button--outlined {
+    background-color: var(--bg_btn-hero--outlined);
+    color: var(--btn-hero);
+    border: solid 0.15rem var(--btn-hero);
+  }
+
+  &:hover {
+    background-color: var(--bg_btn-hero--hover);
+    color: var(--btn-hero--hover);
+  }
+
+  i {
+    margin-left: 0.5rem; /* Add margin when an icon is attached */
+  }
+
+  @include respond-to(tablet) {
+    max-height: 2.55rem;
+  }
+  @include respond-to(mobile-lg) {
+    max-height: 2.35rem;
+  }
+  @include respond-to(mobile-md) {
+    max-height: 2.25rem;
+  }
+  @include respond-to(mobile) {
+    max-height: 2.15rem;
+  }
+}
