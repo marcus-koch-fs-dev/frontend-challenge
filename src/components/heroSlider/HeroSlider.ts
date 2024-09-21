@@ -56,6 +56,7 @@ export default class HeroSlider extends HTMLElement {
     await this.fetchProducts()
     if (this.products.length > 0) {
       this.activeSliderId = this.products[0]?.id.toString()
+      this.preLoadImages()
     }
     this.render()
     this.setupEventListeners()
@@ -206,6 +207,7 @@ export default class HeroSlider extends HTMLElement {
         )
       }
     }
+    this.preLoadImages()
     this.render()
   }
 
@@ -231,6 +233,7 @@ export default class HeroSlider extends HTMLElement {
         this.upperBorder = this.activeSliderNo + 1
       }
     }
+    this.preLoadImages()
     this.render()
   }
 
@@ -262,14 +265,39 @@ export default class HeroSlider extends HTMLElement {
     `
   }
 
+  /**
+   * Preloads the previous, current, and next images in the slider.
+   * Ensures that if the current slide is the first or last, the
+   * previous and next slides wrap around the array.
+   */
+  preLoadImages() {
+    let pre = this.activeSliderNo - 1
+    let cur = this.activeSliderNo
+    let next = this.activeSliderNo + 1
+
+    // If the current slide is the first, wrap 'pre' to the last slide
+    if (pre < 0) {
+      pre = this.products.length - 1
+    }
+
+    // If the current slide is the last, wrap 'next' to the first slide
+    if (next >= this.products.length) {
+      next = 0
+    }
+
+    // Preload images for previous, current, and next slides
+    ;[pre, cur, next].forEach((idxNo) => {
+      const product = this.products[idxNo]
+      const img = new Image()
+      img.src = product.images[0]
+    })
+  }
+
   // Generate the list of slide indicators
   indicatorList(): string {
     return this.products
       .slice(this.lowerBorder, this.upperBorder)
       .map((product: ProductDetails) => {
-        // const img = new Image()
-        // img.src = product.images[0]
-
         const isActive =
           this.activeSliderId === product.id.toString()
             ? 'hero-slider__slide-indicator--active'
