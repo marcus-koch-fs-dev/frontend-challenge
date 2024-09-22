@@ -40,6 +40,7 @@ export default class HeroSlider extends HTMLElement {
     super()
     this.showNextSlide = this.showNextSlide.bind(this)
     this.showPreviousSlide = this.showPreviousSlide.bind(this)
+    this.handleSlideClick = this.handleSlideClick.bind(this)
     this.handleTouchStart = this.handleTouchStart.bind(this)
     this.handleTouchMove = this.handleTouchMove.bind(this)
     this.handleTouchEnd = this.handleTouchEnd.bind(this)
@@ -175,14 +176,19 @@ export default class HeroSlider extends HTMLElement {
   }
 
   // Handles click events on slide indicators (event delegation)
-  handleSlideClick = (event: Event) => {
+  handleSlideClick(event: Event) {
+    // Click on span
     const target = event.target as HTMLElement
 
+    // Listening to event on the slide indicator
     if (target.classList.contains('hero-slider__slide-indicator')) {
-      const index = Array.from(this.sliderIndicators!.children).indexOf(
-        target.parentElement!
-      )
-      this.showSelectSlide(index)
+      const parentLi = target.closest('li') // Find closest element in the hierarchy
+      const productId = parentLi?.getAttribute('id')
+
+      if (productId) {
+        // Set the new Id, if was found
+        this.showSelectSlide(productId)
+      }
     }
   }
 
@@ -233,15 +239,23 @@ export default class HeroSlider extends HTMLElement {
         this.upperBorder = this.activeSliderNo + 1
       }
     }
-    this.preLoadImages()
     this.render()
   }
 
-  // Show the selected slide based on its index
-  showSelectSlide(index: number) {
-    this.activeSliderNo = index
-    this.activeSliderId = this.products[index].id.toString()
-    this.render()
+  // Show the selected slide based on the product ID
+  showSelectSlide(productId: string) {
+    const productIndex = this.products.findIndex(
+      (product) => product.id.toString() === productId
+    )
+
+    // When product was found, activate new Slider
+    if (productIndex !== -1) {
+      this.activeSliderNo = productIndex
+      this.activeSliderId = productId
+
+      this.preLoadImages()
+      this.render()
+    }
   }
 
   // Generate the HTML for the current slide's content
