@@ -9,12 +9,13 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "eslint . && tsc && vite build && vitest run --coverage",
+    "build": "vitest run --coverage && eslint --fix . && tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
     "test": "vitest --watch --coverage"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.1.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.5.0",
     "@typescript-eslint/parser": "^8.5.0",
