@@ -8,6 +8,7 @@
     "name": "Marcus Koch"
   },
   "scripts": {
+    "start": "vite",
     "dev": "vite",
     "build": "vitest run --coverage && eslint --fix . && tsc && vite build",
     "preview": "vite preview",
