@@ -1,4 +1,5 @@
 import HeroButton from './HeroButton'
+import '@testing-library/jest-dom'
 
 describe('HeroButton component', () => {
   let buttonElement: HTMLElement | null
