@@ -28,7 +28,7 @@ describe('HeroSlider Component', () => {
     fireEvent(
       heroSliderElement!,
       new TouchEvent('touchstart', {
-        changedTouches: [{ screenX: 300 }] as any // Start at X = 300px
+        changedTouches: [{ identifier: 0, screenX: 300, screenY: 0 } as Touch] // Start at X = 300px
       })
     )
 
@@ -36,7 +36,7 @@ describe('HeroSlider Component', () => {
     fireEvent(
       heroSliderElement!,
       new TouchEvent('touchmove', {
-        changedTouches: [{ screenX: 100 }] as any // Moves to X = 100px
+        changedTouches: [{ identifier: 0, screenX: 100, screenY: 0 } as Touch] // Moves to X = 100px
       })
     )
 
@@ -44,7 +44,7 @@ describe('HeroSlider Component', () => {
     fireEvent(
       heroSliderElement!,
       new TouchEvent('touchend', {
-        changedTouches: [{ screenX: 100 }] as any
+        changedTouches: [{ identifier: 0, screenX: 100, screenY: 0 } as Touch]
       })
     )
 
@@ -58,14 +58,14 @@ describe('HeroSlider Component', () => {
   // Test swipe right functionality to move to the previous slide
   it('should swipe to the previous slide on swipe right', () => {
     // Set the current slide to the second slide (Index 1)
-    ;(heroSliderElement as any).activeSliderNo = 1
+    ;(heroSliderElement as typeof heroSliderElement).activeSliderNo = 1
     heroSliderElement?.render() // Update the render
 
     // Simulate the touchstart event (finger start position)
     fireEvent(
       heroSliderElement!,
       new TouchEvent('touchstart', {
-        changedTouches: [{ screenX: 100 }] as any // Start at X = 100px
+        changedTouches: [{ identifier: 0, screenX: 100, screenY: 0 } as Touch] // Start at X = 100px
       })
     )
 
@@ -73,7 +73,7 @@ describe('HeroSlider Component', () => {
     fireEvent(
       heroSliderElement!,
       new TouchEvent('touchmove', {
-        changedTouches: [{ screenX: 300 }] as any // Moves to X = 300px
+        changedTouches: [{ identifier: 0, screenX: 300, screenY: 0 } as Touch] // Moves to X = 300px
       })
     )
 
@@ -81,7 +81,7 @@ describe('HeroSlider Component', () => {
     fireEvent(
       heroSliderElement!,
       new TouchEvent('touchend', {
-        changedTouches: [{ screenX: 300 }] as any
+        changedTouches: [{ identifier: 0, screenX: 300, screenY: 0 } as Touch]
       })
     )
 
