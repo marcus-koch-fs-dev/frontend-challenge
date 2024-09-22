@@ -286,7 +286,7 @@ export default class HeroSlider extends HTMLElement {
    */
   preLoadImages() {
     let pre = this.activeSliderNo - 1
-    let cur = this.activeSliderNo
+    const cur = this.activeSliderNo
     let next = this.activeSliderNo + 1
 
     // If the current slide is the first, wrap 'pre' to the last slide
