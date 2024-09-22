@@ -1,25 +1,42 @@
 import HeroSlider from './HeroSlider'
 import { fireEvent } from '@testing-library/dom'
 import { products } from '../../mock/heroSliderMockData'
+import { setupServer } from 'msw/node'
+import { restHandlers } from '../../mock/mockServer'
 
 describe('HeroSlider Component', () => {
   let heroSliderElement: HTMLElement | null
+  const server = setupServer(...restHandlers)
 
-  beforeEach(() => {
+  // Start the mock server before all tests
+  beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
+
+  // Close the mock server after all tests
+  afterAll(() => server.close())
+
+  // Reset the server state after each test
+  afterEach(() => {
+    // Reset the mock server handlers after each test
+    server.resetHandlers()
+
+    // Clean up the DOM
+    document.body.innerHTML = ''
+    heroSliderElement = null
+  })
+
+  // Perform asynchronous operations before each test
+  beforeEach(async () => {
     // Register the HeroSlider component and add it to the DOM before each test
     if (!customElements.get('hero-slider')) {
       customElements.define('hero-slider', HeroSlider)
     }
 
     // Add the HeroSlider component to the document body
-    document.body.innerHTML = `<hero-slider></hero-slider>`
+    document.body.innerHTML = `<hero-slider url='https://example.com/products'></hero-slider>`
     heroSliderElement = document.querySelector('hero-slider')
-  })
 
-  afterEach(() => {
-    // Clean up the DOM after each test by clearing the body
-    document.body.innerHTML = ''
-    heroSliderElement = null
+    // Wait for the products to load
+    await heroSliderElement?.fetchProducts() // Wait for the asynchronous data loading
   })
 
   it('should be in the DOM', () => {
