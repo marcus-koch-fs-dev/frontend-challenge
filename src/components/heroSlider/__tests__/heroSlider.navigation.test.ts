@@ -6,7 +6,7 @@ import { products } from '../../../mock/heroSliderMockData'
 describe('HeroSlider Component', () => {
   setupGlobalTests()
 
-  let heroSliderElement: HTMLElement | null
+  let heroSliderElement: HeroSlider | null
 
   beforeEach(async () => {
     if (!customElements.get('hero-slider')) {

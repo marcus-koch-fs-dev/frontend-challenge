@@ -7,7 +7,7 @@ import { fireEvent } from '@testing-library/dom'
 describe('HeroSlider Component', () => {
   setupGlobalTests()
 
-  let heroSliderElement: HTMLElement | null
+  let heroSliderElement: HeroSlider | null
 
   beforeEach(async () => {
     if (!customElements.get('hero-slider')) {
@@ -58,7 +58,7 @@ describe('HeroSlider Component', () => {
   // Test swipe right functionality to move to the previous slide
   it('should swipe to the previous slide on swipe right', () => {
     // Set the current slide to the second slide (Index 1)
-    ;(heroSliderElement as typeof heroSliderElement).activeSliderNo = 1
+    ;(heroSliderElement as HeroSlider).activeSliderNo = 1
     heroSliderElement?.render() // Update the render
 
     // Simulate the touchstart event (finger start position)
