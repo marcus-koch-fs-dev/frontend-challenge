@@ -1,101 +1,105 @@
-# Frontend Challenge
-
-## Overview
+# 🧩 Frontend Challenge
 
 An app that showcases a programmer's skills across various stages of development using modern frontend tools.
 
-## Project Details
+---
 
-- **Author**: Marcus Koch
-- **Version**: `0.0.1`
+## 📦 Installation and Execution
 
-## Scripts
+Use **pnpm** as in the original project.
 
-- **`dev`**: Start the development server.
-- **`build`**: Lint, transpile, and build the project.
-- **`start`**: Start the production server.
-- **`preview`**: Preview the production build.
-- **`lint`**: Run ESLint.
-- **`test`**: Run tests with Vitest.
+```bash
+git clone https://github.com/marcus-koch-fs-dev/frontend-challenge.git
+cd frontend-challenge
+pnpm install
+pnpm run dev
+```
 
-## Setup
+To build and run the production server
 
-1. **Install dependencies**:
+```bash
+pnpm run build
+pnpm start
+```
 
-   ```bash
-   pnpm install
-   ```
+To preview the optimized build locally
 
-2. **Start development server**:
+```bash
+pnpm run preview
+```
 
-   ```bash
-   pnpm run dev
-   ```
+---
 
-3. **Build the project**:
+## ▶️ Available Scripts
 
-   ```bash
-   pnpm run build
-   ```
+* `dev` start the development server
+* `build` lint transpile and build the project
+* `start` start the production server
+* `preview` preview the production build
+* `lint` run ESLint
+* `test` run tests with Vitest
 
-4. **Start production server**:
+---
 
-   ```bash
-   pnpm start
-   ```
+## ✨ Key Features
 
-   This will serve the production build on a local server.
+* TypeScript for JavaScript ergonomics and safety
+* SASS for CSS authoring
+* Autoprefixer for vendor prefixes
+* Brotli compression for production builds
+* Testing with Vitest
 
-5. **Preview the build**:
+---
 
-   ```bash
-   pnpm run preview
-   ```
+## ✅ Features Implemented
 
-6. **Lint the code**:
+1. **Slider with indicator click** users can click indicators to navigate and see the active slide
+2. **Mobile swiping** touch gestures for swiping between slides on phones and tablets
+3. **Image preloading** preloads previous and next slides to improve UX note async requests not fully intercepted and handled yet
 
-   ```bash
-   pnpm run lint
-   ```
+---
 
-7. **Run tests**:
-   ```bash
-   pnpm run test
-   ```
+## 🧭 Project Structure  simplified
 
-## Key Features
+```text
+.
+├── public/            # Static assets
+├── src/               # Source code
+│   ├── components/    # UI components
+│   ├── styles/        # SCSS styles
+│   ├── lib/           # Utilities helpers
+│   └── main.ts        # App entry
+├── index.html
+├── package.json
+├── vite.config.ts
+└── readme.md
+```
 
-- **TypeScript** for JS
-- **SASS** for CSS
-- **Autoprefixer** for vendor prefixes
-- **Brotli Compression** for production builds
-- **Testing** with Vitest
+> structure may vary slightly keep folders consistent with your current repo
 
-## Features Implemented
+---
 
-1. **Slider with Indicator Click**:
-   The slider allows users to click on the indicators to navigate between slides, showing the current active slide.
+## 🧪 Testing
 
-2. **Swiping on Mobile**:
-   Supports touch gestures for swiping between slides on mobile devices and tablets.
+Run unit tests
 
-3. **Preloading Images**:
-   Images are preloaded to enhance the user experience by loading the previous and next slides asynchronously. However, asynchronous requests were not fully intercepted and handled.
+```bash
+pnpm run test
+```
 
-## How to Run the Build Version
+Consider adding coverage and CI later if needed
 
-To run the production build of the application:
+---
 
-1. **Build the project**:
+## 🛠 Tech Stack
 
-   ```bash
-   pnpm run build
-   ```
+* Vite
+* TypeScript
+* SASS  Autoprefixer
+* Vitest
 
-2. **Start the production server**:
+---
 
-   ```bash
-   pnpm start
-   ```
+## 📄 License
 
-   This will serve the optimized production build of the app.
+No explicit license specified yet add one if you plan to share or open‑source
